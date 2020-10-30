@@ -13,7 +13,7 @@ load_dotenv()
 DISCORD_TOKEN = os.getenv("DISCORD_API_TOKEN")
 
 client = discord.Client()
-prog = re.compile('(\s+69\s+)|(^69\s+)|(^69$)|(.*\s+69*)') # 69 regex blaze it
+prog = re.compile('(\s+69\s+)|(^69\s+)|(^69$)|(.*\s+69.*)') # 69 regex blaze it
 
 def format_time(utc):
     from_zone = tz.tzutc()
@@ -37,10 +37,12 @@ async def on_ready():
 async def on_message(message):
     if prog.match(message.content):
         await message.channel.send('nice')
-    elif 'nice' == message.content and not message.author.bot:
+    elif 'nice' == message.content.lower() and not message.author.bot:
         await message.channel.send('super nice')
     elif message.content.startswith(';del'):
         await delete_user_last_message(message)
+    elif message.content.startswith(';fucksean'):
+        await message.channel.send('fuck sean all my homies hate sean')
     elif message.content.startswith(';headass'):
         result = headass.parse_command(message)
         if result != '':
