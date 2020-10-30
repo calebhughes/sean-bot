@@ -4,7 +4,13 @@ import discord
 import re
 import headass
 import os
+
 from dateutil import tz
+from dotenv import load_dotenv
+
+# Load the environment file that holds our token
+load_dotenv()
+DISCORD_TOKEN = os.getenv("DISCORD_API_TOKEN")
 
 client = discord.Client()
 prog = re.compile('(\s+69\s+)|(^69\s+)|(^69$)|(.*\s+69*)') # 69 regex blaze it
@@ -29,10 +35,9 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    # print(f'[{format_time(message.created_at):%Y-%m-%d %I:%M %p}] {message.author.display_name} in {message.channel.name}: {message.content}')
     if prog.match(message.content):
         await message.channel.send('nice')
-    elif 'nice' in message.content and not message.author.bot:
+    elif 'nice' == message.content and not message.author.bot:
         await message.channel.send('super nice')
     elif message.content.startswith(';del'):
         await delete_user_last_message(message)
@@ -40,7 +45,5 @@ async def on_message(message):
         result = headass.parse_command(message)
         if result != '':
             await message.channel.send(result)
-    elif 'Sean' in message.content:
-        await message.channel.send('fuck sean all my homies hate sean')
 
-client.run(os.environ['DISCORD_API_KEY'])
+client.run(DISCORD_TOKEN)
