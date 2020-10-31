@@ -32,6 +32,7 @@ async def delete_user_last_message(invoke_message):
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
+    await client.change_presence(status=discord.Status.online, activity=discord.Game('Fuck Sean'))
 
 @client.event
 async def on_message(message):
