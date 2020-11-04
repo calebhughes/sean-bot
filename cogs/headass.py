@@ -16,7 +16,7 @@ class Headass(commands.Cog):
       await ctx.send('You must include a valid member and a quote for this command')
     else:
       self.save_quote(member, quote)
-      await ctx.send('Quote added successfully :ok:')
+      await ctx.send('Quote added successfully :ok_hand:')
 
   def save_quote(self, member: discord.Member, quote):
     with open(self.filename, 'a+', newline='') as csvfile:

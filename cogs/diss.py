@@ -9,10 +9,13 @@ class Diss(commands.Cog):
 
   @commands.command()
   async def diss(self, ctx, member: discord.Member = None):
+    message = None
     if member is None:
-      await ctx.send(f'fuck {self.default_user_to_roast} all my homies hate {self.default_user_to_roast}')
+     message = await ctx.send(f'fuck {self.default_user_to_roast} all my homies hate {self.default_user_to_roast}')
     else:
-      await ctx.send(f'fuck <@{member.id}> all my homies hate {member.display_name}')
+      message = await ctx.send(f'fuck <@{member.id}> all my homies hate {member.display_name}')
+    emoji = discord.utils.get(ctx.guild.emojis, name='this')
+    await message.add_reaction(emoji)
 
 def setup(client):
   client.add_cog(Diss(client))
