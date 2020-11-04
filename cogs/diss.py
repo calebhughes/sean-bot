@@ -9,7 +9,7 @@ class Diss(commands.Cog):
 
   @commands.command()
   async def diss(self, ctx, member: discord.Member = None):
-    if member is None or quote is None:
+    if member is None:
       await ctx.send(f'fuck {self.default_user_to_roast} all my homies hate {self.default_user_to_roast}')
     else:
       await ctx.send(f'fuck <@{member.id}> all my homies hate {member.display_name}')
