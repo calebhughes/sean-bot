@@ -13,3 +13,6 @@ class Diss(commands.Cog):
       await ctx.send(f'fuck {self.default_user_to_roast} all my homies hate {self.default_user_to_roast}')
     else:
       await ctx.send(f'fuck <@{member.id}> all my homies hate {member.display_name}')
+
+def setup(client):
+  client.add_cog(Headass(client))
