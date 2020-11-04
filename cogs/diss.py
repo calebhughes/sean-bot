@@ -15,4 +15,4 @@ class Diss(commands.Cog):
       await ctx.send(f'fuck <@{member.id}> all my homies hate {member.display_name}')
 
 def setup(client):
-  client.add_cog(Headass(client))
+  client.add_cog(Diss(client))
