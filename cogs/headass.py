@@ -3,6 +3,7 @@ import csv
 import random
 from datetime import datetime
 from discord.ext import commands
+from discord.utils import get
 
 class Headass(commands.Cog):
 
@@ -24,6 +25,7 @@ class Headass(commands.Cog):
       writer.writerow([member.id, quote, datetime.now()])
 
   @commands.command()
+
   async def headass(self, ctx):
     member, quote, when = self.get_quote()
     if member is None:
@@ -32,6 +34,17 @@ class Headass(commands.Cog):
       when_dt = datetime.strptime(when, '%Y-%m-%d %H:%M:%S.%f')
       formatted_time = when_dt.strftime('%m-%d-%Y')
       await ctx.send(f'<@{member}> on {formatted_time} "{quote}"')
+
+  @headass.error
+  async def headass_error(self, ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+      await ctx.send('Command is on cooldown. Please wait and try again.')
+    else:
+      pass
+
+  @commands.command()
+  async def quotelist(self, ctx):
+    pass
 
   def get_quote(self):
     with open(self.filename, 'r+') as f:

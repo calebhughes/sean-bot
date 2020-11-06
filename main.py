@@ -17,6 +17,19 @@ async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     await client.change_presence(status=discord.Status.online, activity=discord.Game('Fuck Sean'))
 
+@client.event
+async def on_command_error(ctx, error):
+    pass
+
+@client.command(aliases=['del'],name='delete')
+async def delete_last_message(ctx):
+    message = ctx.message
+    async for m in message.channel.history(limit=20):
+        if m.author == message.author and m.id != message.id:
+            await m.delete()
+            await message.delete()
+            break
+
 @client.command()
 async def load(ctx, extension):
     client.load_extension(f'cogs.{extension}')
