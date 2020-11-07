@@ -1,4 +1,5 @@
 import discord
+import random
 from discord.ext import commands
 
 class Diss(commands.Cog):
@@ -6,16 +7,16 @@ class Diss(commands.Cog):
   def __init__(self, client):
     self.client = client
     self.default_user_to_roast = 'Sean'
-    self.no_roast = 152213619260522498
 
   @commands.command()
   @commands.cooldown(1.0, 60.0, commands.BucketType.user)
   async def diss(self, ctx, member: discord.Member = None):
     message = None
+    backfires = random.random()
     if member is None:
      message = await ctx.send(f'fuck {self.default_user_to_roast} all my homies hate {self.default_user_to_roast}')
-    elif member.id == self.no_roast:
-      await ctx.send(f'nah')
+    elif backfires <= 0.05:
+      message = await ctx.send(f'Congratulations, you played yourself')
     else:
       message = await ctx.send(f'fuck {member.display_name} all my homies hate {member.display_name}')
     emoji = discord.utils.get(ctx.guild.emojis, name='this')
