@@ -44,7 +44,15 @@ class Headass(commands.Cog):
 
   @commands.command()
   async def quotelist(self, ctx):
-    pass
+    embed = discord.Embed(title='List of Saved Quotes', description='', color=0x03f4fc)
+    desc = ''
+    with open(self.filename, 'r+') as f:
+      reader = csv.reader(f, delimiter=',')
+      lines = list(reader)
+      desc = '\n'.join(f'{i+1}. <@{line[0]}> {line[1]}' for i,line in enumerate(lines))
+      embed.description = desc
+    await ctx.message.channel.send(embed=embed)
+
 
   def get_quote(self):
     with open(self.filename, 'r+') as f:
